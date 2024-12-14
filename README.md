@@ -1,6 +1,6 @@
 # Real-Time TODO Application
 
-This is a real-time TODO application built using **Next.js** for the frontend and **Node.js** for the backend. It utilizes **Server-Sent Events (SSE)** to deliver real-time updates for todos.
+This is a **real-time TODO application** built with **Next.js** for the frontend and **Node.js** for the backend. It uses **Server-Sent Events (SSE)** to provide real-time updates, allowing todos to sync seamlessly across connected clients. This repository serves as a demonstration of how SSE can be used to push updates to all clients in real time.
 
 ---
 
@@ -26,18 +26,9 @@ Ensure you have the following installed:
 
 ### Installation
 
-1. Clone the repository:
-
-   ```bash
-   git clone <repository-url>
-   cd <repository-folder>
-   ```
-
-2. Install dependencies:
-
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
 ---
 
