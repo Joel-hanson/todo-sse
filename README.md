@@ -1,36 +1,174 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Real-Time TODO Application
+
+This is a real-time TODO application built using **Next.js** for the frontend and **Node.js** for the backend. It utilizes **Server-Sent Events (SSE)** to deliver real-time updates for todos.
+
+---
+
+## Features
+
+- **Real-Time Updates**: Automatically syncs todos across clients using Server-Sent Events (SSE).
+- **CRUD Operations**: Create, read, update, and delete todos.
+- **Responsive UI**: Built with modern UI components.
+- **Event-Driven Backend**: Updates are pushed from the backend to the frontend in real time.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ensure you have the following installed:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Node.js**: >= 14.x
+- **npm**: >= 6.x
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Installation
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```bash
+   git clone <repository-url>
+   cd <repository-folder>
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Start development environment:**
+
+  ```bash
+  npm run dev
+  ```
+
+  This will run both the Next.js frontend and the Node.js backend concurrently.
+
+- **Run the frontend (Next.js):**
+
+  ```bash
+  npm run next-dev
+  ```
+
+- **Run the backend (Node.js):**
+
+  ```bash
+  npm run node-dev
+  ```
+
+- **Build for production:**
+
+  ```bash
+  npm run build
+  ```
+
+- **Start production server:**
+
+  ```bash
+  npm start
+  ```
+
+- **Lint the code:**
+
+  ```bash
+  npm run lint
+  ```
+
+---
+
+## How It Works
+
+### Frontend
+
+The frontend is built with **Next.js** and uses components from a UI library (e.g., `@/components/ui/button`, `@/components/ui/card`) to create a responsive and interactive UI.
+
+### Backend
+
+The backend is a **Node.js** application that:
+
+- Serves the frontend application
+- Exposes a REST API for todo management
+- Broadcasts real-time updates to connected clients using **SSE**.
+
+#### Core File: `server.js`
+
+Handles:
+
+- SSE event broadcasting
+- REST API routes for CRUD operations
+
+---
+
+## Real-Time Flow
+
+1. **Frontend**:
+   - Establishes an SSE connection with the backend using `EventSource`.
+   - Updates the UI in response to events (`create`, `update`, `delete`).
+
+2. **Backend**:
+   - On todo changes, broadcasts updates to all connected clients via SSE.
+   - Ensures data consistency by maintaining a central todo store.
+
+---
+
+## API Endpoints
+
+### Base URL
+
+`http://localhost:3000`
+
+### Endpoints
+
+#### `GET /todos`
+
+- Fetch all todos.
+
+#### `POST /todos`
+
+- Create a new todo.
+- **Request Body:**
+
+  ```json
+  {
+    "title": "string",
+    "description": "string",
+    "completed": "boolean"
+  }
+  ```
+
+#### `PUT /todos/:id`
+
+- Update an existing todo.
+- **Request Body:**
+
+  ```json
+  {
+    "title": "string",
+    "description": "string",
+    "completed": "boolean"
+  }
+  ```
+
+#### `DELETE /todos/:id`
+
+- Delete a todo by ID.
+
+#### `GET /events`
+
+- Subscribe to SSE events for real-time updates.
+
+---
+
+## Future Enhancements
+
+- Add user authentication.
+- Implement WebSockets for bidirectional communication.
+- Persist todos in a database (e.g., MongoDB, PostgreSQL).
+- Add support for notifications and reminders.
